@@ -35,7 +35,7 @@ function AdminNavbar() {
                 <div>
 
                     <h2 style={styles.title}>
-                        Guru Fruit Shop
+                       The Guru Fruit Shop
                     </h2>
 
                     <p style={styles.subtitle}>
@@ -79,7 +79,6 @@ function AdminNavbar() {
         </div>
     );
 }
-
 const styles = {
 
     navbar: {
@@ -90,7 +89,7 @@ const styles = {
 
         alignItems: "center",
 
-        padding: "15px 30px",
+        padding: "15px 20px",
 
         background: "white",
 
@@ -102,7 +101,9 @@ const styles = {
 
         zIndex: 1000,
 
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+
+        gap: "15px"
     },
 
     leftSection: {
@@ -111,18 +112,20 @@ const styles = {
 
         alignItems: "center",
 
-        gap: "15px",
+        gap: "12px",
 
-        cursor: "pointer"
+        cursor: "pointer",
+
+        flexWrap: "wrap"
     },
 
     logo: {
 
-        width: "60px",
+        width: "55px",
 
-        height: "60px",
+        height: "55px",
 
-        objectFit: "contain",
+        objectFit: "cover",
 
         borderRadius: "50%"
     },
@@ -133,7 +136,9 @@ const styles = {
 
         color: "#0f7b0f",
 
-        fontSize: "24px"
+        fontSize: "22px",
+
+        fontWeight: "bold"
     },
 
     subtitle: {
@@ -142,21 +147,25 @@ const styles = {
 
         color: "#777",
 
-        fontSize: "13px"
+        fontSize: "12px"
     },
 
     rightSection: {
 
         display: "flex",
 
-        gap: "12px",
+        gap: "10px",
 
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+
+        justifyContent: "center",
+
+        alignItems: "center"
     },
 
     button: {
 
-        padding: "10px 18px",
+        padding: "10px 16px",
 
         border: "none",
 
@@ -170,12 +179,14 @@ const styles = {
 
         cursor: "pointer",
 
-        transition: "0.3s"
+        transition: "0.3s",
+
+        fontSize: "14px"
     },
 
     logoutBtn: {
 
-        padding: "10px 18px",
+        padding: "10px 16px",
 
         border: "none",
 
@@ -187,7 +198,9 @@ const styles = {
 
         fontWeight: "bold",
 
-        cursor: "pointer"
+        cursor: "pointer",
+
+        fontSize: "14px"
     }
 };
 

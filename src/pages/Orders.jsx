@@ -118,8 +118,17 @@ function Orders() {
 
                         :
 
-                        orders.map((order) => (
+                        // orders.map((order) => (
 
+                            orders
+
+.filter(
+    (order) =>
+        order.orderStatus !==
+        "Cancelled"
+)
+
+.map((order) => (
                             <div
                                 key={order.id}
 

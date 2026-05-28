@@ -1,5 +1,3 @@
-
-
 //     import { useEffect, useState } from "react";
 
 //     import api from "../services/api";
@@ -471,11 +469,37 @@
 //                     background: "#f5f5f5"
 //                 }}>
 
-//                     <h2 style={{
+//                     {/* <h2 style={{
 //                         marginBottom: "25px"
 //                     }}>
 //                         🍉 Fresh Fruits
-//                     </h2>
+//                     </h2> */}
+//                     <div style={{
+//     display: "flex",
+//     alignItems: "center",
+//     gap: "12px",
+//     marginBottom: "25px"
+// }}>
+
+//     <img
+//         src="/logo.jpeg"
+//         alt="Guru Fruit Logo"
+//         style={{
+//             width: "55px",
+//             height: "55px",
+//             borderRadius: "50%",
+//             objectFit: "cover"
+//         }}
+//     />
+
+//     <h2 style={{
+//         margin: 0,
+//         color: "#0f7b0f"
+//     }}>
+//         Guru Fruit Shop
+//     </h2>
+
+// </div>
 
 //                     {/* FRUITS LIST */}
 
@@ -492,9 +516,25 @@
 //                             <div
 //         key={fruit.id}
 
-//         onClick={() =>
-//             navigate(`/fruit/${fruit.id}`)
-//         }
+//        onClick={() => {
+
+//     if ( fruit.category?.toLowerCase() ===
+//             "mango") {
+
+//         navigate("/mango-menu");
+
+//     } else if (
+//          fruit.category?.toLowerCase() ===
+//             "jamun"
+//     ) {
+
+//         navigate("/jamun-menu");
+
+//     } else {
+
+//         navigate(`/fruit/${fruit.id}`);
+//     }
+// }}
 //         onMouseEnter={(e) =>
 //             e.currentTarget.style.transform =
 //                 "scale(1.03)"
@@ -980,7 +1020,8 @@
 //     export default Menu;
 
 
-    import { useEffect, useState } from "react";
+
+  import { useEffect, useState } from "react";
 
     import api from "../services/api";
 
@@ -992,6 +1033,12 @@
     function Menu() {
 
         const [fruits, setFruits] = useState([]);
+        const [showOfferPopup, setShowOfferPopup] =
+    useState(false);
+
+const [offerAdded, setOfferAdded] =
+    useState(false);
+    const OFFER_APPLE_ID = 9999;
 
     const [cart, setCart] = useState(
 
@@ -1012,7 +1059,11 @@
     const [deliveryDate, setDeliveryDate] = useState("");
     const [deliveryTime, setDeliveryTime] = useState("");
     const [customerNote, setCustomerNote] = useState("");
+const [search, setSearch] = useState("");
 
+const [selectedCategory, setSelectedCategory] = useState("");
+
+const [maxPrice, setMaxPrice] = useState("");
         // LOAD FRUITS
 
         useEffect(() => {
@@ -1159,18 +1210,69 @@
         };
 
         // TOTAL PRICE
+        // TOTAL PRICE
 
-    const totalPrice = (cart || []).reduce(
-            (total, item) =>
+const totalPrice = (cart || []).reduce(
 
-                total + (item.price * item.qty),
+    (total, item) =>
 
-            0
-        );
+        total + (item.price * item.qty),
 
-        // PLACE ORDER
+    0
+);
+
+    const addOfferApple = () => {
+
+    const offerApple = {
+
+        id: OFFER_APPLE_ID,
+
+        name: "🍎 Offer Apple",
+
+        price: 1,
+
+        qty: 1,
+
+        unit: "1 Piece"
+    };
+
+    setCart([
+        ...cart,
+        offerApple
+    ]);
+
+    setOfferAdded(true);
+
+    setShowOfferPopup(false);
+
+    setTimeout(() => {
+
+        placeOrder();
+
+    }, 100);
+};
+const skipOffer = () => {
+
+    setOfferAdded(true);
+
+    setShowOfferPopup(false);
+
+    setTimeout(() => {
+
+        placeOrder();
+
+    }, 100);
+};
     const placeOrder = () => {
+if (
+    totalPrice >= 1000 &&
+    !offerAdded
+) {
 
+    setShowOfferPopup(true);
+
+    return;
+}
         // NAME VALIDATION
 
         if (customerName.trim() === "") {
@@ -1451,12 +1553,137 @@
                     background: "#f5f5f5"
                 }}>
 
-                    <h2 style={{
+                    {/* <h2 style={{
                         marginBottom: "25px"
                     }}>
                         🍉 Fresh Fruits
-                    </h2>
+                    </h2> */}
+                    <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    marginBottom: "25px"
+}}>
 
+    <img
+        src="/logo.jpeg"
+        alt="Guru Fruit Logo"
+        style={{
+            width: "55px",
+            height: "55px",
+            borderRadius: "50%",
+            objectFit: "cover"
+        }}
+    />
+
+    <h2 style={{
+        margin: 0,
+        color: "#0f7b0f"
+    }}>
+        Guru Fruit ..Nature’s Freshness at Your Doorstep
+    </h2>
+
+</div>
+{/* SEARCH + FILTERS */}
+
+<div style={{
+    display: "flex",
+    gap: "15px",
+    flexWrap: "wrap",
+    marginBottom: "25px",
+    alignItems: "center"
+}}>
+
+    {/* SEARCH BY NAME */}
+
+    <input
+        type="text"
+        placeholder="🔍 Search Fruit"
+
+        value={search}
+
+        onChange={(e) =>
+            setSearch(e.target.value)
+        }
+
+        style={{
+            padding: "12px",
+            width: "240px",
+            borderRadius: "10px",
+            border: "1px solid #ccc"
+        }}
+    />
+
+    {/* FILTER BY CATEGORY */}
+
+    <select
+
+        value={selectedCategory}
+
+        onChange={(e) =>
+            setSelectedCategory(
+                e.target.value
+            )
+        }
+
+        style={{
+            padding: "12px",
+            width: "220px",
+            borderRadius: "10px",
+            border: "1px solid #ccc"
+        }}
+    >
+
+        <option value="">
+            All Categories
+        </option>
+
+        <option value="Mango">
+            Mango
+        </option>
+
+        <option value="Jamun">
+            Jamun
+        </option>
+ <option value="Jam">
+            Jam
+        </option>
+
+         <option value="grapes">
+            grapes
+        </option>
+
+         <option value="Jamun">
+            ....
+        </option>
+
+         <option value="Jamun">
+           .....
+        </option>
+    </select>
+
+    {/* FILTER BY PRICE */}
+
+    <input
+        type="number"
+
+        placeholder="💰 Max Price"
+
+        value={maxPrice}
+
+        onChange={(e) =>
+            setMaxPrice(e.target.value)
+        }
+
+        style={{
+            padding: "12px",
+            width: "180px",
+            borderRadius: "10px",
+            border: "1px solid #ccc"
+        }}
+    />
+
+</div>
                     {/* FRUITS LIST */}
 
                     <div style={{
@@ -1467,19 +1694,77 @@
 
                         {
 
-                            fruits.map((fruit) => (
+                            // fruits.map((fruit) => (
+fruits
 
+.filter((fruit) => {
+const searchText =
+    search.toLowerCase();
+
+const matchSearch =
+
+    fruit.name
+        ?.toLowerCase()
+        .includes(searchText)
+
+    ||
+
+    fruit.category
+        ?.toLowerCase()
+        .includes(searchText)
+
+    ||
+
+    fruit.description
+        ?.toLowerCase()
+        .includes(searchText);
+
+   const matchCategory =
+
+    selectedCategory === ""
+
+    ||
+
+    fruit.category
+        ?.trim()
+        .toLowerCase() ===
+
+    selectedCategory
+        .trim()
+        .toLowerCase();
+
+    const matchPrice =
+
+        maxPrice === ""
+
+        ||
+
+        fruit.price <= Number(maxPrice);
+
+    return (
+
+        matchSearch &&
+
+        matchCategory &&
+
+        matchPrice
+    );
+})
+
+.map((fruit) => (
                             <div
         key={fruit.id}
 
        onClick={() => {
 
-    if (fruit.category === "Mango") {
+    if ( fruit.category?.toLowerCase() ===
+            "mango") {
 
         navigate("/mango-menu");
 
     } else if (
-        fruit.category === "Jamun"
+         fruit.category?.toLowerCase() ===
+            "jamun"
     ) {
 
         navigate("/jamun-menu");
@@ -1953,12 +2238,131 @@
                     }
 
                 </div>
+{
+    showOfferPopup && (
 
+        <div style={popupOverlay}>
+
+            <div style={popupBox}>
+
+                <h1>
+                    🎁 Special Offer
+                </h1>
+
+                <p style={{
+                    fontSize: "18px",
+                    marginBottom: "25px"
+                }}>
+
+                    Your bill is above ₹1000 😍
+
+                    <br /><br />
+
+                    Add 1 Apple for just ₹1 ?
+
+                </p>
+
+                <div style={{
+                    display: "flex",
+                    gap: "15px",
+                    justifyContent: "center"
+                }}>
+
+                    <button
+                        onClick={addOfferApple}
+                        style={yesBtn}
+                    >
+                        ✅ Yes Add
+                    </button>
+
+                    <button
+                        onClick={skipOffer}
+                        style={noBtn}
+                    >
+                        ❌ No Thanks
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    )
+}
                 <Footer />
 
             </div>
         );
     }
+    const popupOverlay = {
+
+    position: "fixed",
+
+    top: 0,
+
+    left: 0,
+
+    width: "100%",
+
+    height: "100%",
+
+    background: "rgba(0,0,0,0.5)",
+
+    display: "flex",
+
+    justifyContent: "center",
+
+    alignItems: "center",
+
+    zIndex: 9999
+};
+
+const popupBox = {
+
+    background: "white",
+
+    padding: "30px",
+
+    borderRadius: "20px",
+
+    width: "90%",
+
+    maxWidth: "400px",
+
+    textAlign: "center",
+
+    boxShadow: "0px 5px 25px rgba(0,0,0,0.2)"
+};
+
+const popupBtn = {
+
+    padding: "12px 20px",
+
+    border: "none",
+
+    borderRadius: "10px",
+
+    color: "white",
+
+    cursor: "pointer",
+
+    fontWeight: "bold",
+
+    fontSize: "15px"
+};
+const yesBtn = {
+
+    ...popupBtn,
+
+    background: "#16a34a"
+};
+
+const noBtn = {
+
+    ...popupBtn,
+
+    background: "#dc2626"
+};
     const inputStyle = {
 
         padding: "12px",

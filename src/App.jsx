@@ -11,6 +11,8 @@ import CustomerLogin from "./pages/CustomerLogin";
 import CustomerProfile from "./pages/CustomerProfile";
 import JamunMenu from "./pages/JamunMenu";
 import MangoMenu from "./pages/MangoMenu";
+import Cart from "./pages/Cart";
+import Account from "./pages/Account";
 function App() {
 
   return (
@@ -44,6 +46,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/cart" element={<Cart />} />
+<Route path="/account" element={<Account />} />
         <Route
     path="/fruit/:id"
     element={<FruitDetails />}

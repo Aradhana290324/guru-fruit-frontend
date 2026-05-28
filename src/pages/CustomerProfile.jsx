@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import api from "../services/api";
+import { toast } from "react-toastify";
 function CustomerProfile() {
 
+    const navigate = useNavigate();
     const [customer, setCustomer] = useState({
 
         name: "",
@@ -64,15 +67,60 @@ function CustomerProfile() {
 
     // SAVE DATA
 
+    // const saveProfile = () => {
+
+    //     localStorage.setItem(
+    //         "customerData",
+    //         JSON.stringify(customer)
+    //     );
+
+    //     alert("Profile Saved 😍");
+    // };
     const saveProfile = () => {
+
+    api.post("/customers", {
+
+        name: customer.name,
+
+        mobile: customer.mobile,
+
+        buildingNumber: customer.house,
+
+        address:
+            `${customer.house},
+             ${customer.area}`,
+
+        landmark: customer.landmark,
+
+        city: customer.city,
+
+        pincode: customer.pincode
+    })
+
+    .then((res) => {
 
         localStorage.setItem(
             "customerData",
-            JSON.stringify(customer)
+            JSON.stringify(res.data)
         );
 
-        alert("Profile Saved 😍");
-    };
+        localStorage.setItem(
+            "customerMobile",
+            customer.mobile
+        );
+
+        toast.success("Profile Saved 😍");
+
+        navigate("/");
+    })
+
+    .catch((err) => {
+
+        console.log(err);
+
+        toast.error("Failed To Save");
+    });
+};
 
     return (
 

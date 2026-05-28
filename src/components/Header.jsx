@@ -21,7 +21,7 @@ function Header() {
             color: "white"
         }}>
 
-            <h2>🍎 Guru Fruit Shop</h2>
+            <h2>The Guru Fruit Shop</h2>
 
             <div style={{ display: "flex", gap: "10px" }}>
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
+import Navbar from "../components/Navbar";
 function JamunMenu() {
 
     const [jamuns, setJamuns] =
@@ -29,6 +30,7 @@ function JamunMenu() {
         <div style={{
             padding: "30px"
         }}>
+            <Navbar />
 
             <h1>
                 🥭 Jamun Special Menu
@@ -48,10 +50,14 @@ function JamunMenu() {
                             key={item.id}
 
                             style={{
-                                width: "220px",
+                              width:
+    window.innerWidth < 768
+        ? "100%"
+        : "240px",
                                 padding: "20px",
                                 border: "1px solid #ddd",
-                                borderRadius: "15px"
+                                borderRadius: "15px",
+                                justifyContent: "center"
                             }}
                         >
 

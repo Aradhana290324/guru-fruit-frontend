@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 function CustomerLogin() {
@@ -12,44 +12,68 @@ function CustomerLogin() {
 
     // LOGIN FUNCTION
 
-    const handleLogin = () => {
+   const handleLogin = () => {
 
-        if (!name || !mobile) {
+    if (!name || !mobile) {
 
-            alert("Enter All Details");
+        alert("Enter All Details");
 
-            return;
-        }
+        return;
+    }
 
-        if (mobile.length !== 10) {
+    if (mobile.length !== 10) {
 
-            alert("Enter Valid Mobile Number");
+        alert("Enter Valid Mobile Number");
 
-            return;
-        }
+        return;
+    }
 
-        const customerData = {
+    const customerData = {
 
-            name,
-            mobile
-        };
-
-        // SAVE CUSTOMER DATA
-
-        localStorage.setItem(
-            "customerData",
-            JSON.stringify(customerData)
-        );
-
-        localStorage.setItem(
-            "customerLoggedIn",
-            "true"
-        );
-
-        alert("Login Successful 😍");
-
-        navigate("/profile");
+        name,
+        mobile
     };
+
+    // SAVE / UPDATE CUSTOMER IN DB
+
+    api.post("/customers", customerData)
+
+        .then((res) => {
+
+            // SAVE LOCAL
+
+            localStorage.setItem(
+                "customerData",
+                JSON.stringify(res.data)
+            );
+
+            localStorage.setItem(
+                "customerLoggedIn",
+                "true"
+            );
+
+            localStorage.setItem(
+                "customerMobile",
+                res.data.mobile
+            );
+
+            localStorage.setItem(
+                "customerName",
+                res.data.name
+            );
+
+            alert("Login Successful 😍");
+
+            navigate("/profile");
+        })
+
+        .catch((err) => {
+
+            console.log(err);
+
+            alert("Login Failed");
+        });
+};
 
     return (
 
