@@ -2163,7 +2163,7 @@ maxWidth: "100%",
     fruit.imageUrl && (
 
         <img
-            src={`http://localhost:8080${fruit.imageUrl}`}
+            src={`https://spring-boot-fruits-production.up.railway.app${fruit.imageUrl}`}
             alt="fruit"
             style={{
                 width: "100%",
