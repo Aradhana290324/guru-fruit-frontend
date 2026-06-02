@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CustomerLogin() {
 
@@ -16,14 +17,14 @@ function CustomerLogin() {
 
     if (!name || !mobile) {
 
-        alert("Enter All Details");
+        toast.warning("Enter All Details");
 
         return;
     }
 
     if (mobile.length !== 10) {
 
-        alert("Enter Valid Mobile Number");
+        toast.warning("Enter Valid Mobile Number");
 
         return;
     }
@@ -62,7 +63,7 @@ function CustomerLogin() {
                 res.data.name
             );
 
-            alert("Login Successful 😍");
+            toast.success("Login Successful 😍");
 
             navigate("/profile");
         })
@@ -71,7 +72,7 @@ function CustomerLogin() {
 
             console.log(err);
 
-            alert("Login Failed");
+            toast.error("Login Failed");
         });
 };
 

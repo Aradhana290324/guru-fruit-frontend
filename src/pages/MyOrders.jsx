@@ -475,6 +475,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 
 import Navbar from "../components/Navbar";
+import { toast } from "react-toastify";
 
 function MyOrders() {
 
@@ -554,7 +555,7 @@ Did You Receive Your Order Successfully ?`
 
         if (received) {
 
-            alert(
+            toast.success(
                 "Thank You For Shopping With Us ❤️"
             );
         }
@@ -563,7 +564,7 @@ Did You Receive Your Order Successfully ?`
 
         else {
 
-            alert(
+            toast.warning(
                 "Please Contact Support 📞"
             );
         }
@@ -611,7 +612,7 @@ Did You Receive Your Order Successfully ?`
 
             .then(() => {
 
-                alert(
+                toast.error(
                     "Order Cancelled ❌"
                 );
 
@@ -622,7 +623,7 @@ Did You Receive Your Order Successfully ?`
 
                 console.log(err);
 
-                alert(
+                toast.error(
                     "Cancel Failed"
                 );
             });

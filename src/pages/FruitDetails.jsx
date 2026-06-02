@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { toast } from "react-toastify";
 function FruitDetails() {
 
     const { id } = useParams();
@@ -63,7 +64,7 @@ const navigate = useNavigate();
         JSON.stringify(cart)
     );
 
-    alert("Added To Cart 🛒");
+    toast.success("Added To Cart 🛒");
 
     navigate("/");
 };

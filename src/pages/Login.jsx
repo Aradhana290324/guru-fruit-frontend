@@ -356,6 +356,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
 
@@ -418,7 +419,7 @@ function Login() {
                     );
                 }
 
-                alert("Login Success 😍");
+                toast.success("Login Success 😍");
 
                 navigate("/admin");
 

@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function MangoMenu() {
 
@@ -84,7 +85,7 @@ function MangoMenu() {
             JSON.stringify(updatedCart)
         );
 
-        alert("Added To Cart 🥭");
+        toast.success("Added To Cart 🥭");
     };
 
     return (

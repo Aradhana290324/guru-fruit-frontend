@@ -1030,6 +1030,7 @@
     import { useNavigate } from "react-router-dom";
     import Navbar from "../components/Navbar";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
     function Menu() {
 
         const [fruits, setFruits] = useState([]);
@@ -1136,7 +1137,7 @@ const [maxPrice, setMaxPrice] = useState("");
 
             if (!fruit.stock) {
 
-                alert("Fruit Out Of Stock ❌");
+                toast.error("Fruit Out Of Stock ❌");
 
                 return;
             }
@@ -1277,7 +1278,7 @@ if (
 
         if (customerName.trim() === "") {
 
-            alert("Please Enter Customer Name");
+            toast.warning("Please Enter Customer Name");
 
             return;
         }
@@ -1288,7 +1289,7 @@ if (
 
         if (!nameRegex.test(customerName)) {
 
-            alert("Name Should Contain Only Letters");
+            toast.warning("Name Should Contain Only Letters");
 
             return;
         }
@@ -1299,7 +1300,7 @@ if (
 
         if (!mobileRegex.test(mobile)) {
 
-            alert("Enter Valid 10 Digit Mobile Number");
+            toast.warning("Enter Valid 10 Digit Mobile Number");
 
             return;
         }
@@ -1308,7 +1309,7 @@ if (
 
         if (address.trim().length < 10) {
 
-            alert("Please Enter Proper Address");
+            toast.warning("Please Enter Proper Address");
 
             return;
         }
@@ -1317,7 +1318,7 @@ if (
 
         if (landmark.trim() === "") {
 
-            alert("Please Enter Landmark");
+            toast.warning("Please Enter Landmark");
 
             return;
         }
@@ -1328,7 +1329,7 @@ if (
 
         if (!pincodeRegex.test(pincode)) {
 
-            alert("Enter Valid 6 Digit Pincode");
+            toast.warning("Enter Valid 6 Digit Pincode");
 
             return;
         }
@@ -1337,7 +1338,7 @@ if (
 
         if (cart.length === 0) {
 
-            alert("Cart Is Empty");
+            toast.error("Cart Is Empty");
 
             return;
         }
@@ -1558,7 +1559,7 @@ Swal.fire({
 
                 console.log(err);
 
-                alert("Order Failed");
+                toast.error("Order Failed");
             });
     };
 
