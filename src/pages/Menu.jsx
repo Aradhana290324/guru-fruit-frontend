@@ -1029,7 +1029,7 @@
     import Footer from "../components/Footer";
     import { useNavigate } from "react-router-dom";
     import Navbar from "../components/Navbar";
-
+import Swal from "sweetalert2";
     function Menu() {
 
         const [fruits, setFruits] = useState([]);
@@ -1462,18 +1462,7 @@ if (
 
         const message =
 
-    `<img
-                        src="/logo.jpeg"
-                        alt="logo"
-
-                        style={{
-                            width: "55px",
-                            height: "55px",
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                            border: "2px solid white"
-                        }}
-                    /> Guru Fruit Shop Order
+    `🍎 Guru Fruit Shop Order
 
     👤 Customer: ${customerName}
 
@@ -1525,28 +1514,30 @@ if (
             whatsappURL,
             "_blank"
         );
-alert(`
-<img
-                        src="/logo.jpeg"
-                        alt="logo"
+Swal.fire({
+    title: "Order Placed Successfully 🎉",
+    html: `
+        <div style="text-align:center">
+            <img src="/logo.jpeg" 
+                style="width:80px;height:80px;border-radius:50%;border:2px solid #16a34a;margin-bottom:10px;" />
 
-                        style={{
-                            width: "55px",
-                            height: "55px",
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                            border: "2px solid white"
-                        }}
-                    /> Order Placed Successfully!
+            <p><b>Thank you for ordering from Guru Fruit Shop 🍉</b></p>
 
-Thank you for ordering from Guru Fruit Shop.
+            <p>Our team has received your order.</p>
 
-Our team has received your order.
+            <p>Fresh fruits will be delivered to your doorstep 🚚</p>
 
-Fresh and delicious fruits will be delivered to your doorstep.
+            <hr/>
 
-🙏 Thank You
-`);
+            <p style="font-size:14px;color:#555">
+                🙏 We appreciate your trust!
+            </p>
+        </div>
+    `,
+    icon: "success",
+    confirmButtonColor: "#16a34a",
+    confirmButtonText: "OK"
+});
 
         // CLEAR FORM
 
