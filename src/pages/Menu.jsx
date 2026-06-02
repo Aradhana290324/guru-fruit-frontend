@@ -1462,7 +1462,18 @@ if (
 
         const message =
 
-    `🍎 Guru Fruit Shop Order
+    `<img
+                        src="/logo.jpeg"
+                        alt="logo"
+
+                        style={{
+                            width: "55px",
+                            height: "55px",
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            border: "2px solid white"
+                        }}
+                    /> Guru Fruit Shop Order
 
     👤 Customer: ${customerName}
 
@@ -1514,8 +1525,28 @@ if (
             whatsappURL,
             "_blank"
         );
+alert(`
+<img
+                        src="/logo.jpeg"
+                        alt="logo"
 
-        alert("Order Placed Successfully 😍");
+                        style={{
+                            width: "55px",
+                            height: "55px",
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            border: "2px solid white"
+                        }}
+                    /> Order Placed Successfully!
+
+Thank you for ordering from Guru Fruit Shop.
+
+Our team has received your order.
+
+Fresh and delicious fruits will be delivered to your doorstep.
+
+🙏 Thank You
+`);
 
         // CLEAR FORM
 
