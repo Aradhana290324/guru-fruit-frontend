@@ -14,5 +14,5 @@ const api = axios.create({
     }
     
 });
-console.log("UPLOAD RESPONSE =", response.data);
+
 export default api;
