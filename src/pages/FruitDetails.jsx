@@ -2,16 +2,22 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import { toast } from "react-toastify";
+import BottomNav from "../components/BottomNav";
 function FruitDetails() {
 
     const { id } = useParams();
 const navigate = useNavigate();
     const [fruit, setFruit] = useState(null);
+    const [activeTab, setActiveTab] = useState("description");
+    const [allFruits, setAllFruits] = useState([]);
 
     useEffect(() => {
-
+api.get("/fruits")
+.then((res)=>{
+    setAllFruits(res.data);
+});
         api.get(`/fruits/${id}`)
 
             .then((res) => {
@@ -69,6 +75,79 @@ const navigate = useNavigate();
     navigate("/");
 };
 
+const AccordionItem = ({
+    title,
+    id,
+    content
+}) => (
+
+    <div
+        style={{
+            marginTop: "15px",
+            borderRadius: "15px",
+            overflow: "hidden",
+            border: "1px solid #eee"
+        }}
+    >
+
+        <div
+
+            onClick={() =>
+                setActiveTab(
+                    activeTab === id
+                        ? ""
+                        : id
+                )
+            }
+
+            style={{
+                padding: "18px",
+                cursor: "pointer",
+                fontWeight: "700",
+              background: "linear-gradient(90deg,#fff8e1,#fff)",
+              borderBottom: "1px solid #eee",
+                display: "flex",
+                justifyContent: "space-between"
+            }}
+        >
+
+            <span>{title}</span>
+
+            <span>
+                {activeTab === id
+                    ? "▲"
+                    : "▼"}
+            </span>
+
+        </div>
+
+        <div
+            style={{
+                maxHeight:
+                    activeTab === id
+                        ? "500px"
+                        : "0px",
+
+                overflow: "hidden",
+
+                transition: "0.4s"
+            }}
+        >
+
+            <p
+                style={{
+                    padding: "20px",
+                    lineHeight: "30px",
+                    color: "#555"
+                }}
+            >
+                {content}
+            </p>
+
+        </div>
+
+    </div>
+);
     if (!fruit) {
 
         return (
@@ -85,11 +164,13 @@ const navigate = useNavigate();
             </div>
         );
     }
-
+const similarFruits = allFruits
+.filter(item => item.id !== fruit?.id)
+.slice(0,4);
     return (
 <div>
 
-        <Navbar />
+        <BottomNav />
 
         <div style={{
             
@@ -110,7 +191,7 @@ const navigate = useNavigate();
 
                 {/* IMAGE */}
 
-                <img
+                {/* <img
                     src={fruit.imageUrl}
                     alt={fruit.name}
                     style={{
@@ -118,7 +199,17 @@ const navigate = useNavigate();
                         maxHeight: "520px",
                         objectFit: "cover"
                     }}
-                />
+                /> */}
+                <img
+  src={fruit.imageUrl}
+  alt={fruit.name}
+  style={{
+    width: "100%",
+    height: window.innerWidth < 768 ? "250px" : "450px",
+    objectFit: "contain",
+    background: "#fff"
+  }}
+/>
 
                 {/* CONTENT */}
 
@@ -224,120 +315,30 @@ const navigate = useNavigate();
                         }}>
                             🌞 {fruit.seasonTag}
                         </span>
+</div>
+                   <AccordionItem
+    title="📝 Product Description"
+    id="description"
+    content={fruit.description}
+/>
 
-                    </div>
+<AccordionItem
+    title="⭐ Premium Quality"
+    id="quality"
+    content={fruit.quality}
+/>
 
-                    {/* DESCRIPTION */}
+<AccordionItem
+    title="💪 Health Benefits"
+    id="benefits"
+    content={fruit.benefits}
+/>
 
-                    <div style={{
-                        marginTop: "30px",
-                        background: "#fafafa",
-                        padding: "24px",
-                        borderRadius: "18px",
-                        border: "1px solid #eee"
-                    }}>
-
-                        <h2 style={{
-                            fontSize: "26px",
-                            marginBottom: "12px",
-                            color: "#222"
-                        }}>
-                            📝 Product Description
-                        </h2>
-
-                        <p style={{
-                            fontSize: "17px",
-                            lineHeight: "32px",
-                            color: "#555"
-                        }}>
-                            {fruit.description}
-                        </p>
-
-                    </div>
-
-                    {/* QUALITY */}
-
-                    <div style={{
-                        marginTop: "24px",
-                        background: "#fff8e1",
-                        padding: "24px",
-                        borderRadius: "18px",
-                        border: "1px solid #f5deb3"
-                    }}>
-
-                        <h2 style={{
-                            fontSize: "26px",
-                            marginBottom: "12px",
-                            color: "#222"
-                        }}>
-                            ⭐ Premium Quality
-                        </h2>
-
-                        <p style={{
-                            fontSize: "17px",
-                            lineHeight: "30px",
-                            color: "#555"
-                        }}>
-                            {fruit.quality}
-                        </p>
-
-                    </div>
-
-                    {/* BENEFITS */}
-
-                    <div style={{
-                        marginTop: "24px",
-                        background: "#e8f5e9",
-                        padding: "24px",
-                        borderRadius: "18px",
-                        border: "1px solid #c8e6c9"
-                    }}>
-
-                        <h2 style={{
-                            fontSize: "26px",
-                            marginBottom: "12px",
-                            color: "#222"
-                        }}>
-                            💪 Health Benefits
-                        </h2>
-
-                        <p style={{
-                            fontSize: "17px",
-                            lineHeight: "30px",
-                            color: "#555"
-                        }}>
-                            {fruit.benefits}
-                        </p>
-
-                    </div>
-
-                    {/* DELIVERY */}
-
-                    <div style={{
-                        marginTop: "24px",
-                        background: "#e3f2fd",
-                        padding: "24px",
-                        borderRadius: "18px",
-                        border: "1px solid #bbdefb"
-                    }}>
-
-                        <h2 style={{
-                            fontSize: "26px",
-                            marginBottom: "12px",
-                            color: "#222"
-                        }}>
-                            🚚 Delivery Information
-                        </h2>
-
-                        <p style={{
-                            fontSize: "17px",
-                            lineHeight: "30px",
-                            color: "#555"
-                        }}>
-                            {fruit.deliveryInfo}
-                        </p>
-
-                    </div>
+<AccordionItem
+    title="🚚 Delivery Information"
+    id="delivery"
+    content={fruit.deliveryInfo}
+/>
 {/* ADD TO CART */}
 
 <div style={{
@@ -423,7 +424,59 @@ const navigate = useNavigate();
                         }}>
                             ❤️ Why Customers Love Us
                         </h2>
+<h2 style={{
+    marginTop:"40px",
+    marginBottom:"15px"
+}}>
+ Similar Fruits
+</h2>
 
+<div style={{
+    display:"grid",
+    gridTemplateColumns:
+    "repeat(auto-fit,minmax(160px,1fr))",
+    gap:"15px"
+}}>
+{
+similarFruits.map(item=>(
+<div
+
+key={item.id}
+
+onClick={()=>
+navigate(`/fruit/${item.id}`)
+}
+
+style={{
+cursor:"pointer",
+background:"#fff",
+padding:"12px",
+borderRadius:"15px",
+boxShadow:
+"0 2px 10px rgba(0,0,0,0.08)"
+}}
+>
+
+<img
+src={item.imageUrl}
+alt=""
+style={{
+width:"100%",
+height:"120px",
+objectFit:"contain"
+}}
+/>
+
+<h4>{item.name}</h4>
+
+<p>
+₹ {item.price}
+</p>
+
+</div>
+))
+}
+</div>
                         <ul style={{
                             lineHeight: "40px",
                             fontSize: "18px",

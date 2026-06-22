@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import AdminNavbar from "../components/AdminNavbar";
+import BottomNav from "../components/BottomNav";
 // import Navbar from "../components/Navbar";
 
 

@@ -13,6 +13,8 @@ import JamunMenu from "./pages/JamunMenu";
 import MangoMenu from "./pages/MangoMenu";
 import Cart from "./pages/Cart";
 import Account from "./pages/Account";
+import BottomNav from "./components/BottomNav";
+import Checkout from "./pages/Checkout";
 function App() {
 
   return (
@@ -65,12 +67,19 @@ function App() {
     path="/mango-menu"
     element={<MangoMenu />}
 />
-
+<Route
+    path="/checkout"
+    element={<Checkout />}
+/>
 <Route
     path="/jamun-menu"
     element={<JamunMenu />}
 />
       </Routes>
+      {
+    window.innerWidth <= 768 &&
+    <BottomNav />
+}
 
     </BrowserRouter>
   );

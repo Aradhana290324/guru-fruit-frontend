@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import Navbar from "../components/Navbar";
-
+// import Navbar from "../components/Navbar";
+import BottomNav from "../components/BottomNav";
 import { useNavigate } from "react-router-dom";
 
 function Cart() {
@@ -102,7 +102,7 @@ function Cart() {
 
         <div>
 
-            <Navbar />
+            <BottomNav />
 
             <div style={{
 
@@ -157,6 +157,14 @@ function Cart() {
                         :
 
                         <>
+                        <div style={{
+    display: "grid",
+    gridTemplateColumns:
+        window.innerWidth < 768
+            ? "repeat(2,1fr)"
+            : "repeat(3,1fr)",
+    gap: "15px"
+}}>
                             {
                                 cart.map((item) => (
 
@@ -260,6 +268,7 @@ function Cart() {
                                     </div>
                                 ))
                             }
+                            </div>
 
                             <div style={{
 
@@ -280,7 +289,7 @@ function Cart() {
                                 <button
 
                                     onClick={() =>
-                                        navigate("/")
+                                        navigate("/checkout")
                                     }
 
                                     style={btnStyle}
@@ -300,33 +309,37 @@ function Cart() {
     );
 }
 
+// const cardStyle = {
+
+//     background: "white",
+
+//     padding: "20px",
+
+//     borderRadius: "15px",
+
+//     marginBottom: "20px",
+
+//    textAlign: "center",
+// padding: "15px"
+// };
 const cardStyle = {
 
     background: "white",
 
-    padding: "20px",
+    borderRadius: "18px",
 
-    borderRadius: "15px",
+    padding: "15px",
 
-    marginBottom: "20px",
+    textAlign: "center",
 
-    display: "flex",
-
-    gap: "20px",
-
-    flexWrap: "wrap",
-
-    alignItems: "center"
+    boxShadow:
+        "0 4px 12px rgba(0,0,0,0.08)"
 };
 
 const imageStyle = {
-
-    width: "150px",
-
-    height: "150px",
-
-    objectFit: "cover",
-
+    width: "100%",
+    height: "120px",
+    objectFit: "contain",
     borderRadius: "12px"
 };
 

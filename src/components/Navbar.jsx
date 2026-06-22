@@ -1117,6 +1117,7 @@ const [editAddress,
     const [editPincode,
         setEditPincode] =
         useState("");
+  
 
     // LOAD CUSTOMER DATA
 
@@ -1250,7 +1251,9 @@ const [editAddress,
                             The Guru Fruit Shop
                         </h2>
 
-                        <p style={styles.subtitle}>
+                       {
+window.innerWidth > 768 && (
+<p style={styles.subtitle}>
                             <b>
                                 Nature’s Freshness at Your Doorstep
                             </b>
@@ -1258,15 +1261,36 @@ const [editAddress,
 
                             Fresh Fruits • Fast Delivery • Pure Happiness
                         </p>
+)
+}
 
                     </div>
 
                 </div>
 
                 {/* RIGHT */}
+{
+    // window.innerWidth <= 768 && (
 
-                <div style={styles.right}>
-
+        // <button
+        //     style={styles.menuBtn}
+        //     onClick={() =>
+        //         setShowMenu(!showMenu)
+        //     }
+        // >
+        //     ☰
+        // </button>
+    // )
+}
+<div
+    style={{
+        ...styles.right,
+        display:
+            window.innerWidth <= 768
+                ? "none"
+                : "flex"
+    }}
+>
                     <button
                         style={styles.button}
                         onClick={() => navigate("/")}
@@ -1643,23 +1667,51 @@ const styles = {
 
     logo: {
 
-        width: "60px",
+    width:
+        window.innerWidth < 768
+            ? "40px"
+            : "60px",
 
-        height: "60px",
+    height:
+        window.innerWidth < 768
+            ? "40px"
+            : "60px",
 
-        borderRadius: "50%",
+    borderRadius: "50%",
 
-        objectFit: "cover"
-    },
+    objectFit: "cover"
+},
+
+    menuBtn: {
+
+    padding: "10px 14px",
+
+    border: "none",
+
+    borderRadius: "10px",
+
+    background: "#0f7b0f",
+
+    color: "white",
+
+    fontSize: "22px",
+
+    cursor: "pointer",
+
+    fontWeight: "bold"
+},
 
     title: {
 
-        margin: 0,
+    margin: 0,
 
-        color: "#0f7b0f",
+    color: "#0f7b0f",
 
-        fontSize: "24px"
-    },
+    fontSize:
+        window.innerWidth < 768
+            ? "16px"
+            : "24px"
+},
 
     subtitle: {
 
@@ -1670,18 +1722,36 @@ const styles = {
         fontSize: "13px"
     },
 
+    // right: {
+
+    //     display: "flex",
+
+    //     gap: "12px",
+
+    //     flexWrap: "wrap",
+
+    //     alignItems: "center",
+
+    //     justifyContent: "center"
+    // },
+
     right: {
 
-        display: "flex",
+    display: "flex",
 
-        gap: "12px",
+    gap: "12px",
 
-        flexWrap: "wrap",
+    flexWrap: "wrap",
 
-        alignItems: "center",
+    alignItems: "center",
 
-        justifyContent: "center"
-    },
+    justifyContent: "center",
+
+    flexDirection:
+        window.innerWidth <= 768
+            ? "column"
+            : "row"
+},
 
     button: {
 

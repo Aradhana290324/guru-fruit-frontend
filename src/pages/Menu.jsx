@@ -1028,8 +1028,9 @@
     // import Header from "../components/Header";
     import Footer from "../components/Footer";
     import { useNavigate } from "react-router-dom";
-    import Navbar from "../components/Navbar";
+    // import Navbar from "../components/Navbar";
 import Swal from "sweetalert2";
+import BottomNav from "../components/BottomNav";
 import { toast } from "react-toastify";
     function Menu() {
 
@@ -1568,7 +1569,7 @@ Swal.fire({
             <div>
 
                 {/* <Header /> */}
-                <Navbar />
+                <BottomNav />
 
                 <div style={{
                     padding: "20px",
@@ -1618,7 +1619,28 @@ Swal.fire({
 }}>
 
     {/* SEARCH BY NAME */}
-
+<div
+    style={{
+        display: "flex",
+        justifyContent: "flex-end",
+        marginBottom: "20px"
+    }}
+>
+    <button
+        onClick={() => navigate("/cart")}
+        style={{
+            background: "#16a34a",
+            color: "white",
+            border: "none",
+            padding: "12px 20px",
+            borderRadius: "10px",
+            cursor: "pointer",
+            fontWeight: "bold"
+        }}
+    >
+        🛒 View Cart ({cart.length})
+    </button>
+</div>
     <input
         type="text"
         placeholder="🔍 Search Fruit"
@@ -1894,7 +1916,7 @@ const matchSearch =
 
                     </div>
 
-                    {/* CART */}
+                    {/*// CART
 
                     <hr style={{
                         margin: "35px 0"
@@ -1945,14 +1967,14 @@ const matchSearch =
 
                                     {/* QTY */}
 
-                                    <div style={{
+                                    {/* <div style={{
                                         display: "flex",
                                         alignItems: "center",
                                         gap: "10px",
                                         marginBottom: "10px"
-                                    }}>
+                                    }}> */}
 
-                                        <button
+                                        {/* <button
 
                                             onClick={() =>
                                                 decreaseQty(item.id)
@@ -1985,9 +2007,9 @@ const matchSearch =
                                                 padding: "5px 12px",
                                                 cursor: "pointer"
                                             }}
-                                        >
+                                        > */}
 
-                                            +
+                                            {/* +
 
                                         </button>
 
@@ -1999,31 +2021,31 @@ const matchSearch =
 
                                 </div>
                             ))
-                    }
+                    } */}
 
                     {/* GRAND TOTAL */}
 
-                    {
+                    {/* { */}
 
-                        cart.length > 0 && (
+                        {/* // cart.length > 0 && (
 
-                            <div style={{
-                                marginTop: "20px",
-                                padding: "20px",
-                                background: "#fff3cd",
-                                borderRadius: "10px"
-                            }}>
+                        //     <div style={{ */}
+                        {/* //         marginTop: "20px", */}
+                        {/* //         padding: "20px", */}
+                        {/* //         background: "#fff3cd", */}
+                                {/* // borderRadius: "10px" */}
+                            {/* // }}> */}
 
-                                <h2>
+                                {/* <h2>
                                     Grand Total : ₹ {totalPrice}
-                                </h2>
+                                </h2> */}
 
-                            </div>
-                        )
-                    }
-
+                            {/* </div> */}
+                        {/* // ) */} 
+                    {/* // } */}
+{/* 
                     {/* CHECKOUT */}
-
+{/* 
                     {
 
                         cart.length > 0 && (
@@ -2254,13 +2276,13 @@ const matchSearch =
 
                                     Place Order
 
-                                </button>
+                                </button> */}
 
-                            </div>
-                        )
-                    }
+                            {/* </div> */}
+                        {/* ) */}
+                    {/* } */}
 
-                </div>
+                </div> 
 {
     showOfferPopup && (
 

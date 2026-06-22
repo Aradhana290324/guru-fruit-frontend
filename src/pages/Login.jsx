@@ -357,7 +357,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import BottomNav from "../components/BottomNav";
 function Login() {
 
     const [username, setUsername] = useState("");
@@ -443,6 +443,7 @@ function Login() {
     return (
 
         <div style={{
+            
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -565,6 +566,7 @@ function Login() {
                 </button>
 
             </div>
+               <BottomNav />
 
         </div>
     );

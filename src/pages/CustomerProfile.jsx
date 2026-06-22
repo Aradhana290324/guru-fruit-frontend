@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { toast } from "react-toastify";
+import BottomNav from "../components/BottomNav";
 function CustomerProfile() {
 
     const navigate = useNavigate();
@@ -76,27 +77,126 @@ function CustomerProfile() {
 
     //     alert("Profile Saved 😍");
     // };
-    const saveProfile = () => {
+//     const saveProfile = () => {
 
+//     api.post("/customers", {
+
+//         name: customer.name,
+
+//         mobile: customer.mobile,
+
+//         buildingNumber: customer.house,
+
+//         address:
+//             `${customer.house},
+//              ${customer.area}`,
+
+//         landmark: customer.landmark,
+
+//         city: customer.city,
+
+//         pincode: customer.pincode
+//     })
+
+//     .then((res) => {
+
+//         localStorage.setItem(
+//             "customerData",
+//             JSON.stringify(res.data)
+//         );
+
+//         localStorage.setItem(
+//             "customerMobile",
+//             customer.mobile
+//         );
+
+//         toast.success("Profile Saved 😍");
+
+//         navigate("/");
+//     })
+
+//     .catch((err) => {
+
+//         console.log(err);
+
+//         toast.error("Failed To Save");
+//     });
+// };
+const saveProfile = () => {
+
+    // ✅ NAME VALIDATION (only letters + spaces)
+    const nameRegex = /^[A-Za-z ]+$/;
+
+    if (!customer.name.trim()) {
+        toast.error("Name is required");
+        return;
+    }
+
+    if (!nameRegex.test(customer.name)) {
+        toast.error("Name should contain only letters");
+        return;
+    }
+
+    // ✅ MOBILE VALIDATION (10 digits only)
+    const mobileRegex = /^[0-9]{10}$/;
+
+    if (!customer.mobile.trim()) {
+        toast.error("Mobile number is required");
+        return;
+    }
+
+    if (!mobileRegex.test(customer.mobile)) {
+        toast.error("Enter valid 10 digit mobile number");
+        return;
+    }
+
+    // ✅ HOUSE VALIDATION
+    if (!customer.house.trim()) {
+        toast.error("House / Flat number is required");
+        return;
+    }
+
+    // ✅ AREA VALIDATION
+    if (!customer.area.trim()) {
+        toast.error("Area is required");
+        return;
+    }
+
+    // ✅ LANDMARK VALIDATION
+    if (!customer.landmark.trim()) {
+        toast.error("Landmark is required");
+        return;
+    }
+
+    // ✅ CITY VALIDATION
+    if (!customer.city.trim()) {
+        toast.error("City is required");
+        return;
+    }
+
+    // ✅ PINCODE VALIDATION (6 digits)
+    const pincodeRegex = /^[0-9]{6}$/;
+
+    if (!customer.pincode.trim()) {
+        toast.error("Pincode is required");
+        return;
+    }
+
+    if (!pincodeRegex.test(customer.pincode)) {
+        toast.error("Enter valid 6 digit pincode");
+        return;
+    }
+
+    // ✅ API CALL (ONLY IF VALID)
     api.post("/customers", {
-
-        name: customer.name,
-
-        mobile: customer.mobile,
-
+        name: customer.name.trim(),
+        mobile: customer.mobile.trim(),
         buildingNumber: customer.house,
-
-        address:
-            `${customer.house},
-             ${customer.area}`,
-
+        address: `${customer.house}, ${customer.area}`,
         landmark: customer.landmark,
-
         city: customer.city,
-
         pincode: customer.pincode
     })
-
     .then((res) => {
 
         localStorage.setItem(
@@ -113,11 +213,9 @@ function CustomerProfile() {
 
         navigate("/");
     })
-
     .catch((err) => {
 
         console.log(err);
-
         toast.error("Failed To Save");
     });
 };
@@ -178,7 +276,9 @@ function CustomerProfile() {
                     value={customer.mobile}
                     onChange={handleChange}
                     style={inputStyle}
+                    
                 />
+                
 
                 <input
                     type="text"

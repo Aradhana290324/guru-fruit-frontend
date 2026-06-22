@@ -474,8 +474,9 @@ import { useEffect, useState } from "react";
 
 import api from "../services/api";
 
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import { toast } from "react-toastify";
+import BottomNav from "../components/BottomNav";
 
 function MyOrders() {
 
@@ -648,7 +649,7 @@ Did You Receive Your Order Successfully ?`
             minHeight: "100vh"
         }}>
 
-            <Navbar />
+            <BottomNav />
 
             <div style={{
                 padding: "20px"
