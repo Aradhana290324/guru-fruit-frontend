@@ -1650,16 +1650,17 @@ console.log("skipOfferCheck =", skipOfferCheck);
             "ORDER SAVED:",
             res.data
         );
-        console.log("BEFORE WHATSAPP");
+//         console.log("BEFORE WHATSAPP");
 
-window.open(
-  "https://wa.me/917715082461?text=TEST",
-  "_blank"
-);
+// window.open(
+//   "https://wa.me/917715082461?text=TEST",
+//   "_blank"
+// );
 
-console.log("AFTER WHATSAPP");
+// console.log("AFTER WHATSAPP");
 
-        // WHATSAPP MESSAGE
+
+         // WHATSAPP MESSAGE
         const orderSummary =
             latestCart.map(item =>
 
